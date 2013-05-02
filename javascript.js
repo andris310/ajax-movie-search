@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 
-	$('#results_list').on('mouseover', 'li', getInfo);
+	$('#results_list').on('click', 'li', getInfo);
 
 		function getInfo(){
 			var imdbID = $(this).attr('data-id');
@@ -12,19 +12,17 @@ $(document).ready(function() {
 				success: function(info){
 
 					// get attributes 
-					var title = info['Title'];
-					var year = info['Year'];
 					var poster = ('<img src="' + info['Poster'] + '"/>');
-					var actors = info['Actors'];
-					var director = info['Director'];
 
 					// build details node
 					var details = $('<div id="details"></div>');
-					var textInfo = $('<div id"text_info"></div>')
-					details.append($("<h2>" + title + " " + year + "</h2>"));
+					var textInfo = $('<div id="text_info"></div>')
+					details.append($("<h2>" + info['Title'] + " " + info['Year'] + "</h2>"));
 					details.append(poster);
-					textInfo.append($('<span><h4>Director: </h4>' + director + '</span>'));
-					textInfo.append($('<span><h4>Actors: </h4>' + actors + '</span>'));
+					textInfo.append($('<span><h4>Genre: </h4>' + info['Genre'] + '</span>'));
+					textInfo.append($('<span><h4>Director: </h4>' + info['Director'] + '</span>'));
+					textInfo.append($('<span><h4>Actors: </h4>' + info['Actors'] + '</span>'));
+					textInfo.append($('<p><h4>Plot: </h4>' + info['Plot'] + '</p>'));
 					details.append(textInfo);
 
 					// add node to DOM
@@ -35,6 +33,7 @@ $(document).ready(function() {
 
 	$('form').bind('keyup submit', function(event) {
 		event.preventDefault();
+		$('#results_list').fadeIn(400);
 		var title = $('#movie_title').val();
 
 		$.ajax({
@@ -45,7 +44,6 @@ $(document).ready(function() {
 				$('#results_list').html('');
 
 				var r = results.Search;
-				console.log(results.Search);
 
 				for(var i = 0; i < r.length; i += 1){
 					var movie = r[i]['Title'];

@@ -2,6 +2,10 @@ form {
 	margin: 20px;
 }
 
+h2 {
+	float: right;
+}
+
 #container {
 	margin: 40px auto;
 	width: 900px;
@@ -10,7 +14,6 @@ form {
 
 #results {
 	width: 30%;
-	border: 1px solid blue;
 	float: left;
 	margin: 20px 20px 20px 0;
 }
@@ -20,8 +23,8 @@ form {
 }
 
 #info {
-	width: 67%;
-	border: 1px solid red;
+	padding: 10px;
+	width: 65%;
 	float: right;
 	margin: 20px 0 20px 0;
 }
